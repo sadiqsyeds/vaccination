@@ -3,12 +3,12 @@ import { Button, Card, Row, Table } from "react-bootstrap";
 
 const CenterList = (props) => {
   return (
-    <Card>
+    <Card className="m-2 border">
       <Row>
         <Table striped>
           <thead>
             <tr>
-              <th>#</th>
+              <th>Sl. No.</th>
               <th>Center Name</th>
               <th>Address</th>
               <th>Pincode</th>

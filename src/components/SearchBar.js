@@ -15,19 +15,19 @@ const SearchBar = () => {
 
   return (
     <Row>
-      <Card>
-        <form onSubmit={handleSubmitHandler}>
-          <input
-            type="text"
-            className="form-control"
-            name="centerName"
-            value={centerName}
-            onChange={(e) => setCenterName(e.target.value)}
-          />
-          <Button variant="primary" type="submit">
-            Search
-          </Button>
-        </form>
+      <Card className="m-4">
+          <form onSubmit={handleSubmitHandler} className="d-flex row m-2">
+            <input
+              type="text"
+              className="form-control"
+              name="centerName"
+              value={centerName}
+              onChange={(e) => setCenterName(e.target.value)}
+            />
+            <Button variant="primary" type="submit" className="mt-2 mb-2">
+              Search
+            </Button>
+          </form>
       </Card>
     </Row>
   );
