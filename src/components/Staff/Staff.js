@@ -1,23 +1,31 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Container, Row, Table } from "react-bootstrap";
 import AddStaff from "./AddStaff";
+import Cookies from "js-cookie";
 
 const Staff = () => {
-  const token =
-    "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2NTUxNDk5NSwiaWF0IjoxNjY1MzM0OTk1fQ.qoN70opvyjqqPlqNYhW4al1KHz6oT9ZQNGlxZfm5zqxqjRQfFAsCShT5CNReaqpNdzyhOFXSXFl8g1JkecRFaw";
-  axios
-    .get("http://localhost:8084/admin/getAll", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
-    .then((response) => {
-      console.log("Response", response.data);
-    })
-    .catch((e) => {
-      console.log("Error: ", e.response.data);
-    });
+  useEffect(() => {
+    let token;
+    if (Cookies.get("adminToken")) {
+      token = JSON.parse(Cookies.get("adminToken"));
+    }
+
+    const req_url = `${process.env.BASE_URL}/vaccinationcenter/getAll`;
+    console.log(req_url);
+    axios
+      .get(req_url, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => {
+        console.log("Response", response.data);
+      })
+      .catch((e) => {
+        console.log("Error: ", e.response.data);
+      });
+  }, []);
   return (
     <>
       <AddStaff />

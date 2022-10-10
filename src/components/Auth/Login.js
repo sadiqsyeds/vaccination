@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import "./Login.css";
 import { notifySuccess, notifyError } from "../toast";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -12,14 +13,18 @@ const Login = () => {
       notifyError("Please enter username and password");
     }
 
+    // const req_url = `${process.env.REACT_APP_AUTH_URL}/login`;
+    const req_url = 'http://localhost:8084/login';
+
     axios
-      .post("http://localhost:8084/login", {
+      .post(req_url, {
         userName: username,
         password: password,
       })
       .then(function (res) {
         if (res.data.success === true) {
           console.log(res.data);
+          Cookies.set("adminToken", JSON.stringify(res.data.token));
           notifySuccess("Logged in successfully");
         } else {
           notifyError("Invalid credentials !");
